@@ -26,7 +26,10 @@ class ArticlesController < ApplicationController
     new_article = ApplicationController.render partial: 'articles/article', locals: {article: @article}
     ActionCable.server.broadcast(
       "NotificatonsChannel",
-      new_article
+      {
+        notice: "Article was successfully created.",
+        article: new_article,
+      }
     )
   end
 
